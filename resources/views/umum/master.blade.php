@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Kredit Bptw</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <title>Arsip MOU UNIVERSITAS DUTA BANGSA</title>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <!-- Font Awesome -->
@@ -32,15 +32,11 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav ml-auto mt-2 mt-sms-0  ">
                 <li class="nav-item ">
-                    <a id="home" class="nav-link" href="/">Home </a>
+                    <a id="home" class="nav-link" href="{{route('daftarArsip')}}">Home </a>
                 </li>
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{route('produk')}}">Product</a>
-                </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{route('produk')}}">Kontak</a>
+                    <a class="nav-link" href="{{route('daftarArsip')}}">Kontak</a>
                 </li>
 
                 <li class="nav-item ">

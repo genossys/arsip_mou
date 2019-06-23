@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('judul')
-Data User
+Data Instansi
 @endsection
 
 @section('content')
@@ -9,8 +9,8 @@ Data User
 
 <!-- Button to Open the Modal -->
 <div>
-    <button id="tambahModal" style="margin-bottom: 10px; margin-top: 20px" type="button" class="btn btn-primary box-tools pull-right" data-toggle="modal" data-target="#modaltambahUser">
-        Tambah Data User
+    <button id="tambahModal" style="margin-bottom: 10px; margin-top: 20px" type="button" class="btn btn-primary box-tools pull-right" data-toggle="modal" data-target="#modaltambahInstansi">
+        Tambah Data Instansi
     </button>
 
 </div>
@@ -23,6 +23,7 @@ Data User
                 <th>Email</th>
                 <th>Nama</th>
                 <th>No. Telp</th>
+                <th>Alamat</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,15 +31,15 @@ Data User
 </div>
 
 <!--Srart Modal -->
-<div class="modal fade" id="modaltambahUser">
+<div class="modal fade" id="modaltambahInstansi">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Data User</h4>
+                <h4 class="modal-title">Tambah Data Instansi</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <form action="" method="POST" id="formSimpanUser" class="form">
+            <form action="" method="POST" id="formSimpanInstansi" class="form">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="alert alert-danger" style="display:none"></div>
@@ -47,17 +48,19 @@ Data User
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Nama </label>
-                                <input type="text" class="form-control" placeholder="Nama" id="txtNama" name="txtNama">
+                                <label>Kode Instansi </label>
+                                <input type="text" class="form-control" placeholder="Nama" id="txtKode" name="txtKode">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Email </label>
-                                <input type="email" class="form-control" placeholder="Nama" id="txtEmail" name="txtEmail">
+                                <label>Nama </label>
+                                <input type="text" class="form-control" placeholder="Nama" id="txtNama" name="txtNama">
                             </div>
                         </div>
+
+
                     </div>
 
                     <div class="form-group">
@@ -66,22 +69,17 @@ Data User
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Hak Akses</label>
-                                <select class="form-control" id="cBoxHakAkses">
-                                    <option value="admin">Admin</option>
-                                    <option value="user">Unit</option>
-                                    <option value="pimpinan">Pimpinan</option>
-                                    <option value="mitrakerja">Mitra Kerja</option>
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>No.Telp </label>
                                 <input type="text" class="form-control" placeholder="No. Telp" id="txtNoTelp" name="txtNoTelp">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Email </label>
+                                <input type="email" class="form-control" placeholder="Nama" id="txtEmail" name="txtEmail">
                             </div>
                         </div>
                     </div>
@@ -92,7 +90,7 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" id="txtPasswordUser" name="txtPasswordUser">
+                                <input type="password" class="form-control" placeholder="Password" id="txtPasswordInstansi" name="txtPasswordInstansi">
                             </div>
                         </div>
 
@@ -100,14 +98,10 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Konfirmasi Password</label>
-                                <input type="password" class="form-control" placeholder="Masukan Ulang Password" id="txtConPasswordUser" name="txtConPasswordUser">
+                                <input type="password" class="form-control" placeholder="Masukan Ulang Password" id="txtConPasswordInstansi" name="txtConPasswordInstansi">
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div class="text-right">
                         <button id="btnSimpan" class="btn btn-primary"></button>
                     </div>

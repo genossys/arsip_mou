@@ -15,13 +15,19 @@ Route::get('/', function () {
     return view('umum/welcome');
 });
 
+Route::get('/daftararsip', function () {
+    return view('umum/arsip');
+})->name('daftarArsip');
+
+Route::get('/registermember', 'Master\memberController@showFormRegistrasi');
+Route::post('/postRegister', 'Master\memberController@register')->name('registermember');
 Auth::routes();
 
 
 //Login
-Route::get('/login','AuthController@login')->name('login');
-Route::post('/postlogin','AuthController@postlogin');
-Route::get('/logout','AuthController@logout')->name('logout');
+Route::get('/login','Auth\LoginController@login')->name('login');
+Route::post('/postlogin','Auth\LoginController@postlogin');
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'],function(){
 
@@ -38,11 +44,15 @@ Route::get('/user', function () {
     return view('/admin/master/datauser');
 })->name('user');
 
+Route::get('/instansi', function () {
+    return view('/admin/master/datainstansi');
+})->name('instansi');
 
-
-
+Route::get('/home', function () {
+    return view('admin/menuawal');
+});
 
 
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+

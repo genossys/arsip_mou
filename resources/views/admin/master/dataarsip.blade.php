@@ -88,7 +88,28 @@ Data Arsip
                             <label class="custom-file-label" for="customFile">Pilih file</label>
                         </div>
                     </div>
+                    <div class="row pt-2">
 
+
+                        <div class="col-sm-6 ">
+                            <div class="form-group">
+                                <label>Instansi</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-info input-group-text" id="instansiModal" data-toggle="modal" data-target="#modalCariInstansi"><i class="fa fa-search"></i></button>
+                                    </div>
+                                    <input type="text" class="form-control float-right" id="txtInstansi" name="txtInstansi"  placeholder="Instansi">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" col-sm-6">
+                            <label><br></label>
+                            <div class="form-inline">
+                                <a class="text-danger"> *Instansi terkait </a>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="text-right">
                         <button id="btnSimpan" class="btn btn-primary"></button>
@@ -100,6 +121,32 @@ Data Arsip
     </div>
 </div>
 <!-- EndModal -->
+
+<!--Start Modal -->
+<div class="modal fade" id="modalCariInstansi">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Pilih Instansi</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive-lg">
+                    <table id="tbcustomer" class="table table-striped  table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kode Instansi</th>
+                                <th>Nama Instansi</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 

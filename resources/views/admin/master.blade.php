@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{csrf_token()}}">
 
-    <title>ada collection</title>
+    <title>UDB</title>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
 
@@ -67,7 +67,7 @@
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <!-- <img src="{{asset ('/adminlte/img/logoiks.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-                <span class="brand-text font-weight-light">ada collection</span>
+                <span class="brand-text font-weight-light">UDB</span>
             </a>
 
             <!-- Sidebar -->
@@ -109,6 +109,13 @@
                                         <p>Data User</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item ">
+                                    <a href="{{route ('instansi')}}" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Data Instansi</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -124,7 +131,7 @@
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Order</p>
+                                        <p>Kotak Masuk</p>
                                     </a>
                                 </li>
 

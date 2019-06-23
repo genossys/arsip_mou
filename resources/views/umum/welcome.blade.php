@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ada Collection</title>
+    <title>Aplikasi Arsip MOU</title>
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset ('adminlte/plugins/font-awesome/css/font-awesome.min.css')}}">
@@ -22,7 +22,7 @@
 <body class="bodypolos">
 
 
-<nav class="navbar navbarfont navbar-expand-lg navbar-inverse navbar-dark fixed-top home" style="background-color: rgba(0, 0, 0, 0.5)">
+<nav class="navbar navbarfont navbar-expand-lg navbar-inverse navbar-dark fixed-top home" style="background-color: rgba(0, 0, 0, 0.0)">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span id="toggler"><i class="fa fa-bars" aria-hidden="true"></i></span>
     </button>
@@ -32,17 +32,6 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav ml-auto mt-2 mt-sms-0  ">
-            <li class="nav-item ">
-                <a id="home" class="nav-link" href="/">Home </a>
-            </li>
-
-            <li class="nav-item ">
-                <a class="nav-link" href="">Produk</a>
-            </li>
-
-            <li class="nav-item ">
-                <a class="nav-link" href="">Kontak</a>
-            </li>
 
             <li class="nav-item ">
                 <a class="nav-link" href="/login"> Login <i class="fa fa-user"></i></a>
@@ -52,20 +41,20 @@
     </div>
 </nav>
 
-<section class="gambarfullhome">
+<section class="gambarfullhome" style="background-position: 0,-100px;background-size: 110%">
 
     <div class="bgtekshome">
 
         <div class="tekshome">
             <h1 class="judulhome anJudul">
-                ada Collection
+                Aplikasi Arsip MOU
             </h1>
 
             <p class="isihome anIsi">
-                Belanja baju mudah via online
+                Pengarsipan MOU UNIVERSITAS STMIK DUTA BANGSA
             </p>
 
-            <button class="btn btn-lg anBtn btn-depan">Lihat Produk</button>
+            <a class="btn btn-lg anBtn btn-depan" href="{{route('login')}}">Mulai</a>
         </div>
     </div>
 </section>

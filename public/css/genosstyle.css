@@ -1,12 +1,12 @@
 html,
 body {
     height: 100%;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
 }
 
-.bodylogin{
+.bodylogin {
     background-color: rgba(0, 0, 0, 0.85);
     height: 100%;
     width: 100%;
@@ -15,17 +15,21 @@ body {
     background-position: 0, -100px;
 }
 
-.bodypolos{
-background-image: unset;
+.bodypolos {
+    background-image: unset;
 }
 
 nav.home {
-    background-color: rgba(255, 255, 255, 1);
+    width: 100px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 li.nav-item {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #toggler {
@@ -36,15 +40,12 @@ nav.home li.nav-item .nav-link {
     border-radius: 10px;
     color: white;
     font-size: 20px;
-    font-weight: 500;
-    font-weight: 500;
-    text-shadow: 2px;
-    transition: 0.5s;
-    text-shadow: 0px 0px 10px blue;
+    transition: 0.8s;
 }
 
 nav.home li.nav-item .nav-link:hover {
-    text-shadow: 0px 0px 10px red;
+    text-shadow: 0px 0px 5px cornflowerblue;
+    color: cornflowerblue;
 }
 
 nav.home li.nav-item .nav-link:active {
@@ -76,9 +77,7 @@ ul.navbar-nav {
 }
 
 .bgtekshome {
-
 }
-
 
 .tekshome {
     width: 40%;
@@ -92,35 +91,27 @@ ul.navbar-nav {
     font-size: 60px;
     font-weight: 800;
     color: white;
-    text-shadow: 0px 0px 10px blue;
-
-}
-
-.judulhome:hover{
-    text-shadow: 0px 0px 10px red;
+    text-shadow: 0px 0px 10px black;
 }
 
 .isihome {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 300;
     color: white;
-    text-shadow: 0px 0px 10px blue;
+    text-shadow: 0px 0px 10px black;
 }
 
-.isihome:hover{
-    text-shadow: 0px 0px 10px red;
-}
-
-.btn-depan{
+.btn-depan {
+    width: 120px;
     background-color: white;
-    box-shadow: 0px 0px 10px blue;
-    color: blue;
+    box-shadow: 0px 0px 10px black;
+    color: black;
 }
 
-.btn-depan:hover{
+.btn-depan:hover {
     background-color: white;
-    box-shadow: 0px 0px 10px red;
-    color: red;
+    box-shadow: 0px 0px 10px cornflowerblue;
+    color: cornflowerblue;
 }
 
 .anJudul,
@@ -150,7 +141,7 @@ ul.navbar-nav {
     transform: translate(0, 0);
 }
 
-.produkkami{
+.produkkami {
     background-color: rgba(255, 255, 255, 0.85);
     padding-top: 30px;
     padding-bottom: 30px;
@@ -158,17 +149,25 @@ ul.navbar-nav {
 .newproduk {
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: red;
+    background-image: url("../assets/gambar/bgslide.jpg");
+    background-size: cover;
     min-height: 400px;
-
+    padding-top: 160px;
 }
 
-.modalproduk{
-    background-color: red;
+.modalproduk {
+    background-image: url("../assets/gambar/bgmodal.jpg");
+    background-size: auto;
+    background-position: -100px -50px;
     border-radius: 10px;
-    box-shadow: 3px 3px 5px black;
 }
 
+.panelmodal{
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
 
 .gambarnew {
     height: 20vw;
@@ -191,13 +190,11 @@ ul.navbar-nav {
 .input-plus {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    box-shadow: 3px 3px 5px grey;
 }
 
 .input-min {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-    box-shadow: 3px 3px 5px grey;
 }
 
 .judulsection {
@@ -208,53 +205,29 @@ ul.navbar-nav {
     padding: 5px;
 }
 
+/* Kartu produk */
 .kartuproduk {
-    padding: 10px;
-    height: 320px;
-    border-radius: 10px;
-    background-color: red;
-    box-shadow: 3px 3px 5px grey;
+    height: 250px;
     overflow: hidden;
 }
 
 .kartuproduk img {
     width: 100%;
-    height: 60%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    height: 65%;
     object-fit: cover;
-    cursor: pointer;
 }
 
-.kartuproduk h3{
-    margin-top: 5px;
-        width: 100%;
-        text-align: center;
-        cursor: pointer;
+.kartuproduk .namaproduk{
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.kartuproduk h4 {
-    width: 100%;
-}
+.kartuproduk .hargaproduk{
 
-.kartuproduk h4 {
-    color: black;
-}
-
-.tombolpesankecil {
-    width: 88%;
-    bottom: 0;
-    margin-top: 0;
-    margin-right: 10px;
-    position: absolute;
-
-}
-
-.paketkami {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    background-color: rgba(255, 215, 0, 0.85);
-
+    overflow: hidden;
+    color: #330B47;
+    font-weight: 700;
 }
 
 .footer {
@@ -266,49 +239,40 @@ ul.navbar-nav {
     background-color: rgba(34, 34, 34, 0.85);
 }
 
-.kartupaket {
-    padding: 10px;
-    height: 500px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 3px 3px 5px grey;
-    overflow: hidden;
-}
-
-.kartupaket img {
-    width: 100%;
-    height: 40%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    object-fit: cover;
-}
-
-.tombolpesanpaket {
-    width: 92%;
-    position: absolute;
-    bottom: 0px;
-}
-
-.namapaket{
-    margin-top: 10px;
-    color: red;
-}
-
 /* Modal Produk */
-.modalprodukdialog{
+.modalprodukdialog {
     background-color: rgba(0, 0, 0, 0);
     border: 0;
 }
-.modalprodukbody{
+.modalprodukbody {
     background-color: rgba(0, 0, 0, 0);
-
 }
 
 /* Utility */
-.btn-danger{
+.btn-danger {
     background-color: red;
 }
 
-.sidebar-dark-primary{
-    background-color: #1a237e;
+.sidebar-dark-primary {
+    background-color: #267aa1;
 }
+
+.tombolcarousel {
+    width: 5%;
+}
+
+/* baju */
+.baju{
+    background-color: rgba(240, 240, 240, 1);
+}
+
+/* tabelkeranjang */
+.tabelkeranjang{
+    padding-top: 140px;
+}
+
+.rekening{
+    background-color: rgba(255, 255, 255,0.7);
+}
+
+
