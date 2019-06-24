@@ -62,7 +62,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($request->only( $login_type, 'password'))) {
-            return redirect('/');
+            return redirect('/admin');
         } else {
             return redirect()->back()->with('gagal', 'user id/password salah');
         }

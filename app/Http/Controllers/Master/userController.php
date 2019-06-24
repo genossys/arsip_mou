@@ -23,8 +23,8 @@ class userController extends Controller
     //menampilkan data user
     public function getDataUser(){
         $user = User::query()
-                ->select('id','username','email','hakAkses','noHp')
-                ->where('hakAkses','!=','customer')
+                ->select('id','username','email','hakAkses','noHp', 'alamat')
+                ->where('hakAkses','!=','mitra')
                 ->get();
         return DataTables::of($user)
             ->addIndexColumn()
@@ -69,6 +69,7 @@ class userController extends Controller
                 $user->password = Hash::make($r->password);
                 $user->nohp = $r->nohp;
                 $user->hakAkses = $r->hakAkses;
+                $user->alamat = $r->alamat;
                 $user->save();
                 return response()->json([
                     'sqlResponse' => true,

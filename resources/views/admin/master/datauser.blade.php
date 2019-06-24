@@ -20,8 +20,8 @@ Data User
         <thead>
             <tr>
                 <th>#</th>
+                <th>Username</th>
                 <th>Email</th>
-                <th>Nama</th>
                 <th>No. Telp</th>
                 <th>Action</th>
             </tr>
@@ -48,28 +48,28 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Nama </label>
-                                <input type="text" class="form-control" placeholder="Nama" id="txtNama" name="txtNama">
+                                <input type="text" class="form-control" placeholder="Nama" id="username" name="username">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Email </label>
-                                <input type="email" class="form-control" placeholder="Nama" id="txtEmail" name="txtEmail">
+                                <input type="email" class="form-control" placeholder="Nama" id="email" name="email">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Alamat </label>
-                        <input type="text" class="form-control" placeholder="Alamat" id="txtAlamat" name="txtAlamat">
+                        <input type="text" class="form-control" placeholder="Alamat" id="alamat" name="alamat">
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Hak Akses</label>
-                                <select class="form-control" id="cBoxHakAkses">
+                                <select class="form-control" id="hakAkses" name="hakAkses">
                                     <option value="admin">Admin</option>
                                     <option value="user">Unit</option>
                                     <option value="pimpinan">Pimpinan</option>
@@ -81,7 +81,7 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>No.Telp </label>
-                                <input type="text" class="form-control" placeholder="No. Telp" id="txtNoTelp" name="txtNoTelp">
+                                <input type="text" class="form-control" placeholder="No. Telp" id="nohp" name="nohp">
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Password" id="txtPasswordUser" name="txtPasswordUser">
+                                <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@ Data User
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Konfirmasi Password</label>
-                                <input type="password" class="form-control" placeholder="Masukan Ulang Password" id="txtConPasswordUser" name="txtConPasswordUser">
+                                <input type="password" class="form-control" placeholder="Masukan Ulang Password" id="passwordconf" name="passwordconf">
                             </div>
                         </div>
                     </div>
@@ -122,22 +122,24 @@ Data User
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('/css/bootstrap-datepicker.min.css')}}">
+<link rel="stylesheet" href="{{ asset('/css/dataTables.bootstrap4.min.css')}}">
 @endsection
 
 
 @section('script')
 <script src="{{ asset('/js/tampilan/fileinput.js') }}"></script>
 <script src="{{ asset('/js/tampilan/changemodal.js') }}"></script>
-<script src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTablesBootstrap4.js') }}"></script>
+<script src="{{ asset('/js/Master/user.js') }}"></script>
 <script type="text/javascript">
-    $(function() {
-        $(".datepicker").datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true,
-        });
-    });
-</script>
-
+$("#passwordedit-confirm").on("blur", function () {
+    var psw = document.getElementById("password").value;
+    var pswcnf = document.getElementById("ppasswordconf").value;
+    if ((psw == pswcnf)) {
+        $("#passwordHelpEdit").attr("hidden", true);
+    } else {
+        $("#passwordHelpEdit").attr("hidden", false);
+    }
+});</script>
 @endsection

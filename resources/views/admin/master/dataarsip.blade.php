@@ -40,7 +40,7 @@ Data Arsip
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <form action="" method="POST" id="formSimpanArsip" class="form">
+            <form action="" method="POST" id="formSimpanArsip" class="form" >
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="alert alert-danger" style="display:none"></div>
@@ -50,7 +50,7 @@ Data Arsip
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>ID Arsip </label>
-                                <input type="text" class="form-control" placeholder="ID Arsip" id="txtIdArsip" name="txtIdArsip">
+                                <input type="text" class="form-control" placeholder="ID Arsip" id="kdArsip" name="kdArsip">
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@ Data Arsip
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Judul Arsip</label>
-                                <input type="text" class="form-control" placeholder="Judul Arsip" id="txtJudulArsip" name="txtJudulArsip">
+                                <input type="text" class="form-control" placeholder="Judul Arsip" id="judulArsip" name="judulArsip">
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@ Data Arsip
 
                     <div class="form-group">
                         <label id="labelKetSnack">Keterangan Arsip </label>
-                        <textarea class="form-control" rows="3" id="txtKeterenganArsip" name="txtKeterenganArsip"></textarea>
+                        <textarea class="form-control" rows="3" id="keterangan" name="keterangan"></textarea>
                     </div>
 
                     <div class="form-group">

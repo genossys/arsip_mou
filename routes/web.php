@@ -31,14 +31,38 @@ Route::get('/logout','Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'],function(){
 
+    Route::group(['prefix' => 'admin', 'middleware' => 'hakakses:pimpinan|admin'], function () {
 
-Route::get('/admin', function () {
-    return view('/admin/menuawal');
-})->name('admin');
+            Route::get('/', function () {
+                return view('/admin/menuawal');
+            })->name('admin');
 
-Route::get('/arsip', function () {
-    return view('/admin/master/dataarsip');
-})->name('arsip');
+            Route::group(['prefix' => 'user'], function () {
+                Route::get('/', 'Master\userController@index')->name('pageuser');
+                Route::get('/dataUser', 'Master\userController@getDataUser');
+                Route::post('/simpanUser', 'Master\userController@addUser');
+                Route::post('/editUser', 'Master\userController@editUser');
+                Route::post('/editPassword', 'Master\userController@editPassword');
+                Route::delete('/deleteUser', 'Master\userController@delete');
+            });
+
+            Route::group(['prefix' => 'arsip'], function () {
+                Route::get('/', 'Master\arsipController@index')->name('pagearsip');
+                Route::get('/dataArsip', 'Master\arsipController@getDataArsip');
+                Route::post('/simpanArsip', 'Master\arsipController@insert');
+                Route::post('/editArsip', 'Master\arsipController@edit');
+                Route::delete('/deleteArsip', 'Master\arsipController@delete');
+            });
+
+
+    });
+
+
+
+
+// Route::get('/arsip', function () {
+//     return view('/admin/master/dataarsip');
+// })->name('arsip');
 
 Route::get('/user', function () {
     return view('/admin/master/datauser');
