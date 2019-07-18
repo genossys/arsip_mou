@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('pimpinan.master')
 @section('content')
 <!-- Content Header (Page header) -->
 

@@ -4,12 +4,12 @@ namespace App\Master;
 
 use Illuminate\Database\Eloquent\Model;
 
-class arsipModel extends Model
+class draftMouModel extends Model
 {
     //
-    protected $table = 'tb_arsip';
+    protected $table = 'tb_draftmou';
     protected $fillable = [
-        'id', 'jenisArsip', 'nomorArsip', 'mitra', 'file'
+        'id','mitra', 'nomorMouMitra', 'nomorMouUdb', 'tanggalPembuatan', 'tanggalExpired', 'file','status'
     ];
     protected $primaryKey = 'id';
     public $incrementing = false;

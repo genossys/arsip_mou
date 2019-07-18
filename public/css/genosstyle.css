@@ -19,52 +19,8 @@ body {
     background-image: unset;
 }
 
-nav.home {
-    width: 100px;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-li.nav-item {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
 #toggler {
     color: black;
-}
-
-nav.home li.nav-item .nav-link {
-    border-radius: 10px;
-    color: white;
-    font-size: 20px;
-    transition: 0.8s;
-}
-
-nav.home li.nav-item .nav-link:hover {
-    text-shadow: 0px 0px 5px cornflowerblue;
-    color: cornflowerblue;
-}
-
-nav.home li.nav-item .nav-link:active {
-    text-shadow: 0px 0px 10px red;
-}
-
-li a i {
-    margin-left: 3px;
-}
-nav img {
-    height: 60px;
-}
-
-nav a.navbar-brand {
-    margin-left: 60px;
-}
-
-ul.navbar-nav {
-    margin-right: 100px;
 }
 
 .gambarfullhome {

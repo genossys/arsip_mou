@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('judul')
-Data User
+Data Mitra
 @endsection
 
 @section('content')
@@ -11,9 +11,9 @@ Data User
 <!-- Button to Open the Modal -->
 <section class="mb-5">
     <div class="pt-3">
-        <button id="btnTambah" type="button" class="btn btn-primary btn box-tools pull-left" data-toggle="modal" data-target="#modalTambahUser">
+        <!-- <button id="btnTambah" type="button" class="btn btn-primary btn box-tools pull-left" data-toggle="modal" data-target="#modalTambahMitra">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
-        </button>
+        </button> -->
         <div class="pull-right">
             <input id="caridata" type="text" class="form-control" name='caridata' onkeyup="showData()" />
         </div>
@@ -27,12 +27,12 @@ Data User
 </div>
 
 <!--Srart Modal -->
-<div class="modal fade" id="modalTambahUser">
+<div class="modal fade" id="modalTambahMitra">
     <div class="modal-dialog">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Data User</h6>
+                <h6 class="modal-title">Data Mitra</h6>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -40,56 +40,39 @@ Data User
                 <div class="modal-body">
                     <div class="alert alert-danger" style="display:none"></div>
                     <div class="alert alert-success" style="display:none"></div>
-                    <input type="hidden" id="oldkdUser" name="oldkdUser">
-                    <input value="{{auth()->user()->username}}" hidden id="user" name="user">
+                    <input type="hidden" id="oldkdMitra" name="oldkdMitra">
+                    <input value="{{auth()->user()->username}}" hidden id="mitra" name="mitra">
                     <div class="form-group">
-                        <label>User Name </label>
-                        <input type="text" class="form-control" placeholder="Username" id="username" name="username">
+                        <label>Nomor MOU (Mitra) </label>
+                        <input type="text" class="form-control" placeholder="Nomor MOU Mitra" id="nomorMouMitra" name="nomorMouMitra">
                     </div>
                     <div class="form-group">
-                        <label>email</label>
-                        <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+                        <label>Nomor Mou (UDB)</label>
+                        <input disabled type="text" class="form-control" placeholder="Nomor MOU UDB" id="nomorMouUdb" name="nomorMouUdb">
                     </div>
-
                     <div class="form-group">
-                        <label>Hak Akses</label>
-                        <select class="form-control" id="hakAkses" name="hakAkses">
-                            <option value="Admin">Admin</option>
-                            <option value="Pimpinan">Pimpinan</option>
-                        </select>
+                        <label>Tanggal Expired</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control float-right datepicker" name="tanggalExpired" id="tanggalExpired">
+                            <input type="text" class="form-control float-right" hidden value="{{date('Y-m-d')}}" name="tanggalPembuatan" id="tanggalPembuatan">
+                        </div>
                     </div>
-
                     <div class="form-group">
-                        <label>Alamat </label>
-                        <textarea class="form-control" rows="3" id="alamat" name="alamat"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>No. Hp</label>
-                        <input type="text" class="form-control" placeholder="noHp" id="noHp" name="noHp">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">{{ __('Password') }}</label>
-
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password-confirm">{{ __('Confirm Password') }}</label>
-
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <label>File MOU </label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file" name="file">
+                            <label class="custom-file-label" for="customFile">Pilih file</label>
+                        </div>
                     </div>
 
                     <div class="text-right">
                         <!-- <input id="btnSimpan" class="btn btn-primary" type="submit">Simpan <i id="iconbtn" class="fa fa-floppy-o" aria-hidden="true"></i></inp> -->
-                        <button name="btnSimpan" id="btnSimpan" class="btn btn-primary">Simpan</button>
+                        <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Upload"></td>
                     </div>
                 </div>
             </form>
@@ -121,14 +104,14 @@ Data User
 
 <script>
     function showData() {
-        var user = $("#user").val();
+        var mitra = $("#mitra").val();
         var caridata = $("#caridata").val();
 
         $.ajax({
             type: 'GET',
-            url: '/admin/user/showUser',
+            url: '/admin/mitra/showMitra',
             data: {
-                user: user,
+                mitra: mitra,
                 caridata: caridata,
             },
             success: function(response) {
@@ -145,16 +128,16 @@ Data User
         event.preventDefault();
         $.ajax({
             method: 'post',
-            url: '/admin/user/insertUser',
+            url: '/mitra/mitra/MitraInsertMou',
             data: new FormData(this),
             contentType: false,
             cache: false,
             processData: false,
             success: function(data) {
-                $('#modalTambahUser').modal('toggle');
+                $('#modalTambahMitra').modal('toggle');
                 Swal.fire({
                     type: 'success',
-                    title: 'User berhasil di buat',
+                    title: 'Mou berhasil di buat',
                     showConfirmButton: false,
                     timer: 1500
                 })

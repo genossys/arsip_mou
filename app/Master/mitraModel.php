@@ -4,14 +4,14 @@ namespace App\Master;
 
 use Illuminate\Database\Eloquent\Model;
 
-class arsipModel extends Model
+class mitraModel extends Model
 {
     //
-    protected $table = 'tb_arsip';
+    protected $table = 'tb_mitra';
     protected $fillable = [
-        'id', 'jenisArsip', 'nomorArsip', 'mitra', 'file'
+        'username', 'email', 'password', 'noHp', 'alamat'
     ];
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'kdArsip';
     public $incrementing = false;
     public $timestamps = false;
 }

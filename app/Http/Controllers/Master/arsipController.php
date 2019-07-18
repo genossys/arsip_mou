@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Master;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Validator;
+use Validator, Redirect, Response, File;
+use App\Master\satuanModel;
+use App\Master\kategoriModel;
 use App\Master\arsipModel;
+use App\Master\draftMouModel;
+use App\Master\draftMoaModel;
 
 class arsipController extends Controller
 {
@@ -16,139 +20,52 @@ class arsipController extends Controller
         return view('admin.master.dataarsip');
     }
 
-    public function getDatakaArsip()
+
+    public function showArsip(Request $request)
     {
-        $arsip = arsipModel::query()
-            ->select('kdArsip', 'judulArsip', 'keterangan', 'tanggal', 'urlFile', 'username')
+        $caridata = $request->caridata;
+        $draftArsip = arsipModel::where('jenisArsip', 'LIKE', '%' . $caridata . '%')
+            ->orwhere('nomorArsip', 'LIKE', '%' . $caridata . '%')
+            ->orwhere('mitra', 'LIKE', '%' . $caridata . '%')
+            ->orwhere('file', 'LIKE', '%' . $caridata . '%')
             ->get();
 
-        return DataTables::of($arsip)
-            ->addIndexColumn()
-            ->addColumn('action', function ($arsip) {
-                return '<a class="btn-sm btn-warning" id="btn-edit" href="#" onclick="showEditkategori(\'' . $arsip->kdKategori . '\', \'' . $arsip->namaKategori . '\', event)" ><i class="fa fa-edit"></i></a>
-                            <a class="btn-sm btn-danger" id="btn-delete" href="#" onclick="hapus(\'' . $arsip->kdKategori . '\', event)" ><i class="fa fa-trash"></i></a>
-                        ';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }
+        $contoh = $draftArsip->first();
 
-    private function isValid(Request $r)
-    {
-        $messages = [
-            'required'  => 'Field :attribute Tidak Boleh Kosong',
-            'max'       => 'Field :attribute Maksimal :max',
-            'image'       => 'Field :attribute Harus File Gambar',
-        ];
-
-        $rules = [
-            'kdArsip' => 'required|max:25',
-            'judulArsip' => 'required|max:191',
-            'keterangan' => 'required|numeric',
-            'tanggal' => 'required|numeric',
-            'urlFle' => 'required',
-            'username' => 'required',
-        ];
-
-        return Validator::make($r->all(), $rules, $messages);
-    }
-
-    public function insert(Request $r)
-    {
-        if ($this->isValid($r)->fails()) {
-            return response()->json([
-                'valid' => false,
-                'errors' => $this->isValid($r)->errors()->all()
-            ]);
+        if ($contoh != null) {
+            $returnHTML = view('isidata.tabelArsip')->with('draftArsip', $draftArsip)->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
         } else {
-
-            if ($r->hasFile('fileArsip')) {
-                $upFoto = $r->file('fileArsip');
-                $namaFoto = $r->fileArsip . '.' . $upFoto->getClientOriginalExtension();
-                $r->fileArsip->move(public_path('file'), $namaFoto);
-            } else {
-                $namaFoto = '';
-            }
-
-            try {
-                $arsip = new arsipModel();
-                $arsip->kdArsip = $r->kdArsip;
-                $arsip->judulArsip = $r->judulArsip;
-                $arsip->keterangan = $r->keterangan;
-                $arsip->tanggal = $r->dateTanggal;
-                $arsip->username = 'admin';
-                $arsip->urlFile = $namaFoto;
-                $arsip->save();
-                return response()->json([
-                    'valid' => true,
-                    'sqlResponse' => true,
-                    'data' => $arsip
-                ]);
-            } catch (\Throwable $th) {
-                return response()->json([
-                    'valid' => true,
-                    'sqlResponse' => false,
-                    'data' => $th
-                ]);
-            }
+            $returnHTML = view('isidata.datakosong')->with('kosong', 'Data MOU anda akan Tampil di sini ')->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
         }
     }
 
-    public function edit(Request $r)
+    public function insertArsipMOU(Request $request)
     {
-        if ($this->isValid($r)->fails()) {
-            return response()->json([
-                'valid' => false,
-                'errors' => $this->isValid($r)->errors()->all()
-            ]);
-        } else {
-            try {
-                $id = $r->oldkdArsip;
-                $data = [
-                    'kdArsip' => $r->kdArsip,
-                    'judulArsip' => $r->judulArsip,
-                    'keterangan' => $r->keterangan,
-                    'tanggal' => $r->tanggal,
-                    'username' => $r->username,
-                ];
+        $skrng = date('Y-m-d');
+        $mou = draftMouModel::where("id", $request->id)->first();
 
-                if ($r->hasFile('fileArsip')) {
-                    $upFoto = $r->file('fileArsip');
-                    $namaFoto = $r->fileArsip . '.' . $upFoto->getClientOriginalExtension();
-                    $r->fileArsip->move(public_path('file'), $namaFoto);
-                } else {
-                    $namaFoto = '';
-                }
-
-                productModel::query()
-                    ->where('kdArsip', '=', $id)
-                    ->update($data);
-                return response()
-                    ->json([
-                        'sqlResponse' => true,
-                        'sukses' => $data,
-                        'valid' => true,
-                    ]);
-            } catch (\Throwable $th) {
-                return response()->json([
-                    'sqlResponse' => false,
-                    'data' => $th,
-                    'valid' => true,
-                ]);
-            }
-        }
+        $arsip = new arsipModel();
+        $arsip->jenisArsip = "MOU";
+        $arsip->nomorArsip = $mou->nomorMouUdb;
+        $arsip->mitra = $mou->mitra;
+        $arsip->file = $mou->file;
+        $arsip->tanggal = $skrng;
+        $arsip->save();
     }
 
-    public function delete(Request $r)
+    public function insertArsipMOA(Request $request)
     {
-        $id = $r->input('id');
-        productModel::query()
-            ->where('kdArsip', '=', $id)
-            ->delete();;
-        return response()->json([
-            'sukses' => 'Berhasil Di hapus' . $id,
-            'data' => 'tahapan/dataTahapan',
-            'sqlResponse' => true,
-        ]);
+        $skrng = date('Y-m-d');
+        $moa = draftMoaModel::where("id", $request->id)->first();
+
+        $arsip = new arsipModel();
+        $arsip->jenisArsip = "MOA";
+        $arsip->nomorArsip = $moa->nomorMoaUdb;
+        $arsip->mitra = $moa->mitra;
+        $arsip->file = $moa->file;
+        $arsip->tanggal = $skrng;
+        $arsip->save();
     }
 }

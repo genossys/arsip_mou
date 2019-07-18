@@ -15,8 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset ('adminlte/plugins/font-awesome/css/font-awesome.min.css')}}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/adminlte/css/adminlte.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css')}}">
@@ -27,6 +25,8 @@
 
     <link href="{{ asset('/css/sweetalert2.min.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
+
+
     @yield('css')
 </head>
 
@@ -92,30 +92,29 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-database"></i>
                                 <p>
-                                    Master
+                                    Data
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
 
-                                <li class="nav-item ">
-                                    <a href="{{route ('pageuser')}}" class="nav-link">
+                                <li class="nav-item">
+                                    <a href="{{route ('MouMitra')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data User</p>
+                                        <p>Data Mou</p>
                                     </a>
                                 </li>
 
-                                <li class="nav-item ">
-                                    <a href="{{route ('pagemitra')}}" class="nav-link">
+                                <li class="nav-item">
+                                    <a href="{{route ('MoaMitra')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data Mitra</p>
+                                        <p>Data Moa</p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
 
-                        <li class="nav-item has-treeview ">
+                        <!-- <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-cart-arrow-down"></i>
                                 <p>
@@ -124,24 +123,10 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item ">
-                                    <a href="{{route ('pagedraftMou')}}" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data MOU</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item ">
-                                    <a href="{{route ('pagedraftMoa')}}" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data MOA</p>
-                                    </a>
-                                </li>
-
                                 <li class="nav-item">
-                                    <a href="{{route ('pagearsip')}}" class="nav-link ">
+                                    <a href="" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Data Arsip</p>
+                                        <p>Kotak Masuk</p>
                                     </a>
                                 </li>
 
@@ -163,7 +148,7 @@
                                         <p>Data Order</p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </li>
 
                     </ul>
@@ -190,11 +175,6 @@
             <strong>Copyright &copy; 2019.</strong>
         </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -219,6 +199,7 @@
             }
         });
     </script>
+
     @yield('script')
 </body>
 

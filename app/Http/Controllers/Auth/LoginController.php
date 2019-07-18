@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Symfony\Component\HttpFoundation\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -62,7 +63,15 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($request->only( $login_type, 'password'))) {
-            return redirect('/admin');
+            $hakAkses = User::where('username',$request->input('username'))->first();
+            if($hakAkses->hakAkses == 'admin'){
+                return redirect('/admin');
+            }else if($hakAkses->hakAkses == 'pimpinan'){
+                return redirect('/pimpinan');
+            }else{
+                return redirect('/mitra');
+            }
+
         } else {
             return redirect()->back()->with('gagal', 'user id/password salah');
         }

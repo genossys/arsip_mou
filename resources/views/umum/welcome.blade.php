@@ -16,51 +16,64 @@
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/genosstyle.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/animate.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/sweetalert2.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('/js/sweetalert2.min.js') }}"></script>
 
 
 </head>
+
 <body class="bodypolos">
 
+    @if ($message = Session::get('warning'))
+    <script>
+        Swal.fire({
+            type: 'success',
+            title: 'Pendaftaran berhasil',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+    @endif
 
-<nav class="navbar navbarfont navbar-expand-lg navbar-inverse navbar-dark fixed-top home" style="background-color: rgba(0, 0, 0, 0.0)">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span id="toggler"><i class="fa fa-bars" aria-hidden="true"></i></span>
-    </button>
-    <a class="navbar-brand" href="#">
-        <!-- <img src="{{ asset('/assets/gambar/logo2.png') }} " alt="logo" /> -->
-    </a>
+    <nav class="navbar navbarfont navbar-expand-lg navbar-inverse navbar-dark fixed-top home pr-5" style="background-color: rgba(0, 0, 0, 0.0)">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span id="toggler"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <!-- <img src="{{ asset('/assets/gambar/logo2.png') }} " alt="logo" /> -->
+        </a>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav ml-auto mt-2 mt-sms-0  ">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav ml-auto mt-2 mt-sms-0  ">
 
-            <li class="nav-item ">
-                <a class="nav-link" href="/login"> Login <i class="fa fa-user"></i></a>
-            </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/login"> Login <i class="fa fa-user"></i></a>
+                </li>
 
-        </ul>
-    </div>
-</nav>
-
-<section class="gambarfullhome" style="background-position: 0,-100px;background-size: 110%">
-
-    <div class="bgtekshome">
-
-        <div class="tekshome">
-            <h1 class="judulhome anJudul">
-                Aplikasi Arsip MOU
-            </h1>
-
-            <p class="isihome anIsi">
-                Pengarsipan MOU UNIVERSITAS STMIK DUTA BANGSA
-            </p>
-
-            <a class="btn btn-lg anBtn btn-depan" href="{{route('login')}}">Mulai</a>
+            </ul>
         </div>
-    </div>
-</section>
+    </nav>
 
-<!-- JS -->
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{ asset('/js/jquery.min.js') }}"></script>
-<script src="{{ asset('/js/tampilan/genosstyle.js') }}"></script>
+    <section class="gambarfullhome" style="background-position: 0,-100px;background-size: 110%">
+
+        <div class="bgtekshome">
+
+            <div class="tekshome">
+                <h1 class="judulhome anJudul">
+                    Aplikasi Arsip MOU
+                </h1>
+
+                <p class="isihome anIsi">
+                    Pengarsipan MOU UNIVERSITAS STMIK DUTA BANGSA
+                </p>
+
+                <a class="btn btn-lg anBtn btn-depan" href="{{route('login')}}">Mulai</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/tampilan/genosstyle.js') }}"></script>
 </body>
