@@ -22,8 +22,8 @@
                 <td>{{$u->hakAkses}}</td>
                 <td>{{$u->alamat}}</td>
                 <td>{{$u->noHp}}</td>
-                <td style="min-width: 100px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#exampleModal" onclick="setid('{{$u->username}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                    <button class="btn btn-danger btn-sm pull-center" onclick="deletePesanan('{{$u->username}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
+                <td style="min-width: 100px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#modalEditUser" onclick="showEditData('{{$u->id}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger btn-sm pull-center" onclick="deleteData('{{$u->id}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach

@@ -28,7 +28,7 @@ Data DraftMou
 
 <!--Srart Modal -->
 <div class="modal fade" id="modalEditDraftMou">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">

@@ -125,6 +125,40 @@ Data Arsip
         });
     }
 
+    function deleteData(id) {
+        Swal.fire({
+            title: 'Anda yakin?',
+            text: "data ini akan di hapus!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/arsip/deleteArsip',
+                    data: {
+                        id: id,
+                    },
+                    success: function(response) {
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Data berhasil di hapus',
+                            'success'
+                        )
+                        showData();
+                    },
+                    error: function(response) {
+                        alert('gagal \n' + response.responseText);
+                    }
+                });
+            }
+        })
+    }
+
 
     $(window).on("load", function() {
         showData();

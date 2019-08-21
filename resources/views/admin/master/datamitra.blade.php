@@ -81,6 +81,22 @@ Data Mitra
 </div>
 <!-- EndModal -->
 
+<!--Srart Modal -->
+<div class="modal fade" id="modalEditMitra">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Edit Mitra</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form method="post" id="editform" enctype="multipart/form-data">
+                <div class="modal-body" id="wadahModalEdit">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('css')
@@ -145,6 +161,82 @@ Data Mitra
             }
         });
     });
+
+
+    function showEditData(username) {
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/mitra/showEditMitra',
+            data: {
+                username: username,
+            },
+            success: function(response) {
+
+                $("#wadahModalEdit").html(response.html);
+            },
+            error: function(response) {
+                alert('gagal \n' + response.responseText);
+            }
+        });
+    }
+
+    $('#editform').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            method: 'post',
+            url: '/admin/mitra/editMitra',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $('#modalEditMitra').modal('toggle');
+                Swal.fire({
+                    type: 'success',
+                    title: 'User berhasil di edit',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                showData();
+            }
+        });
+    });
+
+    function deleteData(username) {
+        Swal.fire({
+            title: 'Anda yakin?',
+            text: "data ini akan di hapus!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/mitra/deleteMitra',
+                    data: {
+                        username: username,
+                    },
+                    success: function(response) {
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Data berhasil di hapus',
+                            'success'
+                        )
+                        showData();
+                    },
+                    error: function(response) {
+                        alert('gagal \n' + response.responseText);
+                    }
+                });
+            }
+        })
+    }
+
 
     $(window).on("load", function() {
         showData();

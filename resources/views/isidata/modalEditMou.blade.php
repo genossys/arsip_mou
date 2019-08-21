@@ -49,6 +49,7 @@
     </div>
 </div>
 
+
 <div class=" form-group">
     <label>File MOU </label>
     <div class="custom-file">
@@ -70,9 +71,14 @@
     </select>
 </div>
 
+<div class="form-group">
+    <label>Catatan </label>
+    <textarea class="form-control" rows="3" id="keterangan" name="keterangan"></textarea>
+</div>
+
 <div class="text-right">
     <!-- <input id="btnSimpan" class="btn btn-primary" type="submit">Simpan <i id="iconbtn" class="fa fa-floppy-o" aria-hidden="true"></i></inp> -->
-    <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Edit"></td>
+    <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Simpan"></td>
 </div>
 
 <script src="{{ asset('/js/tampilan/fileinput.js') }}"></script>

@@ -70,6 +70,11 @@
     </select>
 </div>
 
+<div class="form-group">
+    <label>Catatan </label>
+    <textarea class="form-control" rows="3" id="keterangan" name="keterangan"></textarea>
+</div>
+
 <div class="text-right">
     <!-- <input id="btnSimpan" class="btn btn-primary" type="submit">Simpan <i id="iconbtn" class="fa fa-floppy-o" aria-hidden="true"></i></inp> -->
     <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Edit"></td>

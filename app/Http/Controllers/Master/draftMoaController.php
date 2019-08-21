@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Master\draftMoaModel;
 use Yajra\DataTables\DataTables;
 use Validator, Redirect, Response, File;
-use App\Master\satuanModel;
-use App\Master\kategoriModel;
+use Charts;
+use App\Charts\SampleChart;
+use App\Master\draftMouModel;
+use App\Master\mitraModel;
 
 class draftMoaController extends Controller
 {
@@ -21,6 +23,37 @@ class draftMoaController extends Controller
     public function moaByMitra()
     {
         return view('mitra.dataDraftMoaByMitra');
+    }
+
+    public function laporanMoa()
+    {
+        return view('admin.laporan.laporanMoa');
+    }
+
+    public function showLaporanMoa(Request $request)
+    {
+        $caridata = $request->caridata;
+        $status = $request->status;
+        $draftMoa = draftMoaModel::where('status', 'LIKE', '%' . $status . '%')
+            ->where(function ($q) use ($caridata) {
+                $q->where('mitra', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('nomorMoaMitra', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('nomorMoaUdb', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%');
+            })
+            ->orderby('tanggalPembuatan', 'desc')
+            ->get();
+
+        $contoh = $draftMoa->first();
+
+        if ($contoh != null) {
+            $returnHTML = view('isidata.tabelLaporanMoa')->with('draftMoa', $draftMoa)->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        } else {
+            $returnHTML = view('isidata.datakosong')->with('kosong', 'Data Moa akan Tampil di sini ')->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
     }
 
     public function getDatadraftMoa()
@@ -52,7 +85,7 @@ class draftMoaController extends Controller
 
         if ($validator->passes()) {
             $file = $request->file('file');
-            $new_name = $request->mitra . $request->nomorMoaMitra . '.' . $file->getClientOriginalExtension();
+            $new_name = $request->mitra . $request->tanggalPembuatan . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('file'), $new_name);
         } else {
             $new_name = '';
@@ -83,6 +116,7 @@ class draftMoaController extends Controller
                     ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
                     ->orwhere('file', 'LIKE', '%' . $caridata . '%');
             })
+            ->orderby('tanggalPembuatan', 'desc')
             ->get();
 
         $contoh = $draftMoa->first();
@@ -104,6 +138,7 @@ class draftMoaController extends Controller
             ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
             ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
             ->orwhere('file', 'LIKE', '%' . $caridata . '%')
+            ->orderby('tanggalPembuatan', 'desc')
             ->get();
         $contoh = $draftMoa->first();
 
@@ -163,7 +198,7 @@ class draftMoaController extends Controller
 
             if ($validator->passes()) {
                 $file = $request->file('file');
-                $new_name = $request->mitra . $request->nomorMoaMitra . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
+                $new_name = $request->mitra . $request->tanggalPembuatan . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('file'), $new_name);
             } else {
                 $new_name = '';
@@ -173,6 +208,7 @@ class draftMoaController extends Controller
         $moa = draftMoaModel::find($request->id);
         $moa->nomorMoaUdb = $request->nomorMoaUdb;
         $moa->status = $request->status;
+        $moa->keterangan = $request->keterangan;
         if (!$request->file == '') {
             $moa->file = $new_name;
         }
@@ -192,7 +228,7 @@ class draftMoaController extends Controller
 
             if ($validator->passes()) {
                 $file = $request->file('file');
-                $new_name = $request->mitra . $request->nomorMoaMitra . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
+                $new_name = $request->mitra . $request->tanggalPembuatan . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('file'), $new_name);
             } else {
                 $new_name = '';
@@ -201,10 +237,37 @@ class draftMoaController extends Controller
 
         $moa = draftMoaModel::find($request->id);
         $moa->nomorMoaMitra = $request->nomorMoaMitra;
+        $moa->namaKegiatan = $request->namaKegiatan;
         $moa->tanggalExpired = $request->tanggalExpired;
         if (!$request->file == '') {
             $moa->file = $new_name;
         }
         $moa->save();
+    }
+
+    public function chart()
+    {
+        $data = collect([]); // Could also be an array
+        $datamou = collect([]); // Could also be an array
+        $mitra = mitraModel::all();
+        $namaMitra = collect([]);
+        foreach ($mitra as $m) {
+            // Could also be an array_push if using an array rather than a collection.
+            $namaMitra->push($m->username);
+            $data->push(draftMoaModel::where('mitra', $m->username)->count());
+            $datamou->push(draftMouModel::where('mitra', $m->username)->count());
+        }
+
+        $chart = new SampleChart;
+        $chart->labels($namaMitra);
+        $chart->dataset('Perhitungan MOA dari mitra', 'bar', $data)->options([
+            'backgroundColor' => '#ff0000',
+        ]);
+
+        $chart->dataset('Perhitungan MOU dari mitra', 'bar', $datamou)->options([
+            'backgroundColor' => '#0000ff',
+        ]);
+        // dd($namaMitra);
+        return view('umum.welcome', ['chart' => $chart]);
     }
 }

@@ -24,7 +24,7 @@
                 <td>{{ link_to('/file/'.$dm->file, $dm->file) }}</td>
 
                 <td style="min-width: 50px">
-                    <button class="btn btn-danger btn-sm pull-center" onclick="deletePesanan('{{$dm->id}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger btn-sm pull-center" onclick="deleteData('{{$dm->id}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach

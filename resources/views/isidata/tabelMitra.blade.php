@@ -7,6 +7,8 @@
                 <th>email</th>
                 <th>noHp</th>
                 <th>alamat</th>
+                <th>File Surat</th>
+                <th>status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -20,8 +22,17 @@
                 <td>{{$m->email}}</td>
                 <td>{{$m->noHp}}</td>
                 <td>{{$m->alamat}}</td>
-                <td style="min-width: 100px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#" onclick="setid('{{$m->username}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                    <button class="btn btn-danger btn-sm pull-center" onclick="deletePesanan('{{$m->username}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
+                <td>{{ link_to('/file/'.$m->fileSurat, $m->fileSurat) }}</td>
+                @if($m->status == "acc")
+                <td class="text-success">{{$m->status}}</td>
+                @elseif($m->status == "tolak")
+                <td class="text-danger">{{$m->status}}</td>
+                @else
+                <td class="text-warning">{{$m->status}}</td>
+                @endif
+
+                <td style="min-width: 100px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#modalEditMitra" onclick="showEditData('{{$m->username}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger btn-sm pull-center" onclick="deleteData('{{$m->username}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach

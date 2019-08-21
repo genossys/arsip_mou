@@ -1,17 +1,39 @@
 <?php
 
-function formatRupiah($angka){
-    return "Rp ".number_format($angka,0,',','.');
+use Carbon\Carbon;
+use DateTimeImmutable as Dti;
+
+
+function formatRupiah($angka)
+{
+    return "Rp " . number_format($angka, 0, ',', '.');
 }
 
-function formatDate($tanggal){
-    return date("Y-m-d", strtotime($tanggal) );
-
+function formatDate($tanggal)
+{
+    return date("Y-m-d", strtotime($tanggal));
 }
 
-function formatDateToSurat($tanggal){
-    return date("d-M-Y", strtotime($tanggal) );
+function formatDateToSurat($tanggal)
+{
+    return date("d-M-Y", strtotime($tanggal));
+}
 
+
+function notifExpired($tanggal)
+{
+    $tgl = Carbon::parse($tanggal);
+    $tgl2 = $tgl->subDays(7);
+    $tgl2 = date('Y-m-d', strtotime($tgl2));
+    $skrng = date('Y-m-d');
+    if ($skrng > $tanggal) {
+        $hasil = "text-danger";
+    } elseif ($skrng >= $tgl2) {
+        $hasil = "text-warning";
+    } else {
+        $hasil = "text-success";
+    }
+    return $hasil;
 }
 
 function formatuang($angka)

@@ -52,13 +52,13 @@ Data Draft MOA
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nomor MOA (Mitra) </label>
-                                <input type="text" class="form-control" placeholder="Nomor MOU Mitra" id="nomorMoaMitra" name="nomorMoaMitra">
+                                <input type="text" class="form-control" placeholder="Nomor MOA Mitra" id="nomorMoaMitra" name="nomorMoaMitra">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nomor MOA (UDB)</label>
-                                <input disabled type="text" class="form-control" placeholder="Nomor MOU UDB" id="nomorMoaUdb" name="nomorMoaUdb">
+                                <input disabled type="text" class="form-control" placeholder="Nomor MOA UDB" id="nomorMoaUdb" name="nomorMoaUdb">
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ Data Draft MOA
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>File MOU </label>
+                        <label>File MOA </label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="file" name="file">
                             <label class="custom-file-label" for="customFile">Pilih file</label>
@@ -208,7 +208,7 @@ Data Draft MOA
         event.preventDefault();
         $.ajax({
             method: 'post',
-            url: '/mitra/draftMou/MitraEditMou',
+            url: '/mitra/draftMoa/MitraEditMoa',
             data: new FormData(this),
             contentType: false,
             cache: false,
@@ -239,7 +239,7 @@ Data Draft MOA
                 $('#modalTambahDraftMoa').modal('toggle');
                 Swal.fire({
                     type: 'success',
-                    title: 'Mou berhasil di buat',
+                    title: 'Draft MOA berhasil di buat',
                     showConfirmButton: false,
                     timer: 1500
                 })

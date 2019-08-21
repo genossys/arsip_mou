@@ -7,6 +7,7 @@
                 <th>Nomor Moa Udb</th>
                 <th>Tanggal Pembuatan</th>
                 <th>Tanggal Expired</th>
+                <th>Catatan dari Admin</th>
                 <th>file</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -21,7 +22,8 @@
                 <td>{{$dm->nomorMoaMitra}}</td>
                 <td>{{$dm->nomorMoaUdb}}</td>
                 <td>{{$dm->tanggalPembuatan}}</td>
-                <td>{{$dm->tanggalExpired}}</td>
+                <td class={{notifExpired($dm->tanggalExpired)}}>{{$dm->tanggalExpired}}</td>
+                <td>{{$dm->keterangan}}</td>
                 <td>{{ link_to('/file/'.$dm->file, $dm->file) }}</td>
                 @if($dm->status == 'revisi')
                 <td class="text-warning">{{$dm->status}}</td>
@@ -30,9 +32,9 @@
                 @else
                 <td class="text-danger">{{$dm->status}}</td>
                 @endif
-                <td style="min-width: 150px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#modalEditDraftMoa" onclick="showEditData('{{$dm->id}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
+                <td style="min-width: 150px">
+                    <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#modalEditDraftMoa" onclick="showEditData('{{$dm->id}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                     <button class="btn btn-info btn-sm pull-center" @if($dm->status != 'acc') disabled @endif onclick="insertArsip('{{$dm->id}}')"> <i class="fa fa-upload" aria-hidden="true"></i></button>
-                    <button class="btn btn-danger btn-sm pull-center" onclick="deletePesanan('{{$dm->id}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach

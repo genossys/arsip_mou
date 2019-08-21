@@ -9,9 +9,8 @@ class mitraModel extends Model
     //
     protected $table = 'tb_mitra';
     protected $fillable = [
-        'username', 'email', 'password', 'noHp', 'alamat'
+        'username', 'email', 'password', 'noHp', 'alamat','fileSurat','status'
     ];
-    protected $primaryKey = 'kdArsip';
+    protected $primaryKey = 'username';
     public $incrementing = false;
-    public $timestamps = false;
 }

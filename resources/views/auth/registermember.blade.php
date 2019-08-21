@@ -3,14 +3,19 @@
 @section('content')
 <div class="bodylogin">
     <div class="gambarfullhome">
+
         <div class="container pt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">{{ __('Register') }}</div>
-
+                        <div class="w-100 bg-danger card-header">{{ __('Register') }}
+                            <a href="/" class="pull-right"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                        </div>
+                        @if ($errors->any())
+                        <div class="bg-danger"> {{ implode('', $errors->all(':message')) }}</div>
+                        @endif
                         <div class="card-body">
-                            <form method="POST" action="{{ route('registermember') }}" id="customerForm">
+                            <form method="POST" action="{{ route('registermember') }}" id="customerForm" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row">
@@ -91,6 +96,17 @@
                                     </div>
                                 </div>
 
+                                <!-- <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">File Surat (*maxs 2Mb) </label>
+                                    <div class="col-md-6">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="file" name="file">
+                                            <label class="custom-file-label" for="customFile">Pilih file</label>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
@@ -113,6 +129,7 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('/js/tampilan/fileinput.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
     $(function() {

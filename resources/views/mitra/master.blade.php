@@ -65,11 +65,11 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-primary" >
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <!-- <img src="{{asset ('/adminlte/img/logoiks.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-                <span class="brand-text font-weight-light">UDB</span>
+                <span class="brand-text font-weight-light">Universitas Duta Bangsa</span>
             </a>
 
             <!-- Sidebar -->
@@ -77,7 +77,7 @@
                 <!-- user panel -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{asset ('/adminlte/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
+                        <!-- <img src="{{asset ('/adminlte/img/avatar5.png')}}" class="img-circle elevation-2" alt="User Image"> -->
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{auth()->user()->username}}</a>
@@ -97,6 +97,13 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="{{route ('dataMitra')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Permohonan Kerjasama</p>
+                                    </a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a href="{{route ('MouMitra')}}" class="nav-link ">
@@ -159,12 +166,13 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper mastermenu">
             <!-- =============================================== -->
 
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <!-- <img style="width: 600px;position:absolute;top: 195px;margin-left:200px;opacity: 0.1" src="{{asset ('assets/gambar/logoudb.png')}}" alt=""> -->
                     @yield('content')
                 </div><!-- /.container-fluid -->
             </section>

@@ -43,7 +43,7 @@ Form Login
                             <button type="submit" class="btn btn-block btn-primary btn-flat">Login</button>
                         </div>
 
-                        <p class="w-100 text-center" style="margin-top: 10px;font-family: 'Merriweather Sans', sans-serif;"><a class="text-bold" href="/registermember">Daftar </a>Sebagai Mitra </p>
+                        <p style="margin-top: 10px;font-family: 'Merriweather Sans', sans-serif;">Jika anda belum terdaftar bisa <a href="/registermember">Daftar disini.</a> </p>
                         <!-- /.col -->
                     </div>
                 </form>

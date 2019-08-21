@@ -25,7 +25,8 @@
                 <td>{{$dm->nomorMoaUdb}}</td>
                 <td>{{$dm->namaKegiatan}}</td>
                 <td>{{$dm->tanggalPembuatan}}</td>
-                <td>{{$dm->tanggalExpired}}</td>
+                <td class={{notifExpired($dm->tanggalExpired)}}>{{$dm->tanggalExpired}}</td>
+                <td>{{$dm->keterangan}}</td>
                 <td>{{ link_to('/file/'.$dm->file, $dm->file) }}</td>
                 @if($dm->status == 'revisi')
                 <td class="text-warning">{{$dm->status}}</td>
@@ -35,7 +36,6 @@
                 <td class="text-danger">{{$dm->status}}</td>
                 @endif
                 <td style="min-width: 100px"> <button class="btn btn-warning btn-sm pull-center" data-toggle="modal" data-target="#modalEditDraftMou" onclick="showEditData('{{$dm->id}}')"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                    <button class="btn btn-danger btn-sm pull-center" onclick="deletePesanan('{{$dm->id}}')"> <i class="fa fa-close" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach

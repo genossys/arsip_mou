@@ -62,20 +62,19 @@ class LoginController extends Controller
             $login_type => $request->input('username')
         ]);
 
-        if (Auth::attempt($request->only( $login_type, 'password'))) {
-            $hakAkses = User::where('username',$request->input('username'))->first();
-            if($hakAkses->hakAkses == 'admin'){
+        if (Auth::attempt($request->only($login_type, 'password'))) {
+            $hakAkses = User::where('username', $request->input('username'))->first();
+            if ($hakAkses->hakAkses == 'admin') {
                 return redirect('/admin');
-            }else if($hakAkses->hakAkses == 'pimpinan'){
-                return redirect('/pimpinan');
-            }else{
+            } else if ($hakAkses->hakAkses == 'pimpinan') {
+                return redirect('/admin');
+            } else if ($hakAkses->hakAkses == 'unit') {
+                return redirect('/admin');
+            } else {
                 return redirect('/mitra');
             }
-
         } else {
             return redirect()->back()->with('gagal', 'user id/password salah');
         }
     }
-
-
 }

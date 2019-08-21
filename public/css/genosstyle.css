@@ -15,6 +15,15 @@ body {
     background-position: 0, -100px;
 }
 
+.bodywelcome {
+    background-color: rgba(255, 255, 255, 0.80);
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 0;
+    background-position: 0, -100px;
+}
+
 .bodypolos {
     background-image: unset;
 }
@@ -32,11 +41,16 @@ body {
     background-size: cover;
 }
 
-.bgtekshome {
+.mastermenu{
+    background-image: url("../assets/gambar/logoudb.png");
+    background-position: center;
+    background-size: 600px auto;
+    background-repeat: no-repeat;
+
 }
 
 .tekshome {
-    width: 40%;
+    width: 369px;
     height: 300px;
     margin-left: 100px;
     padding: 200px 0;
@@ -46,22 +60,22 @@ body {
 .judulhome {
     font-size: 60px;
     font-weight: 800;
-    color: white;
-    text-shadow: 0px 0px 10px black;
+    color: #DA121C;
+    text-shadow: 0px 0px 10px red;
 }
 
 .isihome {
     font-size: 20px;
     font-weight: 300;
-    color: white;
-    text-shadow: 0px 0px 10px black;
+    color: blue;
+    text-shadow: 0px 0px 10px blue;
 }
 
 .btn-depan {
     width: 120px;
-    background-color: white;
+    background-color: red;
     box-shadow: 0px 0px 10px black;
-    color: black;
+    color: white;
 }
 
 .btn-depan:hover {

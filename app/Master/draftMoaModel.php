@@ -9,7 +9,7 @@ class draftMoaModel extends Model
     //
     protected $table = 'tb_draftmoa';
     protected $fillable = [
-        'id','mitra', 'nomorMou', 'namaKegiatan','nomorMoaMitra', 'tanggalPembuatan', 'tanggalExpired', 'file','status','nomorMoaUdb'
+        'id','mitra', 'nomorMou', 'namaKegiatan','keterangan','nomorMoaMitra', 'tanggalPembuatan', 'tanggalExpired', 'file','status','nomorMoaUdb'
     ];
     protected $primaryKey = 'id';
     public $incrementing = false;

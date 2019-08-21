@@ -11,9 +11,11 @@ Data Draft MOU
 <!-- Button to Open the Modal -->
 <section class="mb-5">
     <div class="pt-3">
-        <button id="btnTambah" type="button" class="btn btn-primary btn box-tools pull-left" data-toggle="modal" data-target="#modalTambahDraftMou">
+
+        <button @if($mitra->status != 'acc') disabled @endif  id="btnTambah" type="button" class="btn btn-primary btn box-tools pull-left" data-toggle="modal" data-target="#modalTambahDraftMou">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </button>
+        @if($mitra->status != 'acc') <a class="text-danger text-sm "> &nbsp; *MOU belum bisa di buat karena surat anda belum di setujui.</a> @endif
         <div class="pull-right">
             <input id="caridata" type="text" class="form-control" name='caridata' onkeyup="showData()" />
         </div>
@@ -63,7 +65,7 @@ Data Draft MOU
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>File MOA </label>
+                        <label>File MOA (*maxs 2Mb)</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="file" name="file">
                             <label class="custom-file-label" for="customFile">Pilih file</label>

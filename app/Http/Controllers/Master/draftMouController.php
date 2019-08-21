@@ -9,6 +9,7 @@ use Yajra\DataTables\DataTables;
 use Validator, Redirect, Response, File;
 use App\Master\satuanModel;
 use App\Master\kategoriModel;
+use App\Master\mitraModel;
 
 class draftMouController extends Controller
 {
@@ -18,9 +19,43 @@ class draftMouController extends Controller
         return view('admin.master.dataDraftMou');
     }
 
+    public function laporanMou()
+    {
+        return view('admin.laporan.laporanMou');
+    }
+
+    public function showLaporanMou(Request $request)
+    {
+        $caridata = $request->caridata;
+        $status = $request->status;
+        $draftMou = draftMouModel::where('status', 'LIKE', '%' . $status . '%')
+            ->where(function ($q) use ($caridata) {
+                $q->where('mitra', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('nomorMouMitra', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('nomorMouUdb', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                    ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%');
+            })
+            ->orderby('tanggalPembuatan','desc')
+            ->get();
+
+        $contoh = $draftMou->first();
+
+        if ($contoh != null) {
+            $returnHTML = view('isidata.tabelLaporanMou')->with('draftMou', $draftMou)->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        } else {
+            $returnHTML = view('isidata.datakosong')->with('kosong', 'Data Mou akan Tampil di sini ')->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
+    }
+
+
     public function mouByMitra()
     {
-        return view('mitra.dataDraftMouByMitra');
+        $username = auth()->user()->username;
+        $mitra = mitraModel::where('username', $username)->first();
+        return view('mitra.dataDraftMouByMitra')->with('mitra', $mitra);
     }
 
     public function getDatadraftMou()
@@ -46,13 +81,13 @@ class draftMouController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'file' => 'required|file|max:2048'
+                'file' => 'required|file|max:5048'
             ]
         );
 
         if ($validator->passes()) {
             $file = $request->file('file');
-            $new_name = $request->mitra . $request->nomorMouMitra . '.' . $file->getClientOriginalExtension();
+            $new_name = $request->mitra . $request->tanggalPembuatan . rand(). '.' . $file->getClientOriginalExtension();
             $file->move(public_path('file'), $new_name);
         } else {
             $new_name = '';
@@ -81,7 +116,7 @@ class draftMouController extends Controller
                     ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
                     ->orwhere('file', 'LIKE', '%' . $caridata . '%');
             })
-
+            ->orderby('tanggalPembuatan','desc')
             ->get();
 
         $contoh = $draftMou->first();
@@ -103,6 +138,7 @@ class draftMouController extends Controller
             ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
             ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
             ->orwhere('file', 'LIKE', '%' . $caridata . '%')
+            ->orderby('tanggalPembuatan','desc')
             ->get();
 
         $contoh = $draftMou->first();
@@ -163,7 +199,7 @@ class draftMouController extends Controller
 
             if ($validator->passes()) {
                 $file = $request->file('file');
-                $new_name = $request->mitra . $request->nomorMouMitra . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
+                $new_name = $request->mitra . $request->tanggalPembuatan . rand() . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('file'), $new_name);
             } else {
                 $new_name = '';
@@ -173,6 +209,7 @@ class draftMouController extends Controller
         $mou = draftMouModel::find($request->id);
         $mou->nomorMouUdb = $request->nomorMouUdb;
         $mou->status = $request->status;
+        $mou->keterangan = $request->keterangan;
         if (!$request->file == '') {
             $mou->file = $new_name;
         }
@@ -192,7 +229,7 @@ class draftMouController extends Controller
 
             if ($validator->passes()) {
                 $file = $request->file('file');
-                $new_name = $request->mitra . $request->nomorMouMitra . rand(1, 1000) . '.' . $file->getClientOriginalExtension();
+                $new_name = $request->mitra . $request->tanggalPembuatan . rand() . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('file'), $new_name);
             } else {
                 $new_name = '';

@@ -42,6 +42,7 @@ class userController extends Controller
         }
     }
 
+
     public function insertUser(Request $r)
     {
         # code...
@@ -55,6 +56,46 @@ class userController extends Controller
             $member->hakAkses = $r->hakAkses;
             $member->alamat = $r->alamat;
             $member->save();
+        } catch (\Throwable $th) {
+            return 'Error Program ' . $th;
+        }
+    }
+
+    public function showEditUser(Request $request)
+    {
+        $caridata = $request->user;
+        $user = User::where('id', $caridata)->first();
+
+        if ($user != null) {
+            $returnHTML = view('isidata.modalEditUser')->with('user', $user)->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        } else {
+            $returnHTML = view('isidata.datakosong')->with('kosong', 'Data User akan Tampil di sini ')->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
+    }
+
+    public function editUser(Request $r)
+    {
+        # code...
+
+        try {
+            $member = User::find($r->id);
+            $member->email = $r->email;
+            $member->noHp = $r->noHp;
+            $member->hakAkses = $r->hakAkses;
+            $member->alamat = $r->alamat;
+            $member->save();
+        } catch (\Throwable $th) {
+            return 'Error Program ' . $th;
+        }
+    }
+
+    public function deleteUser(Request $r)
+    {
+        try {
+            $member = User::find($r->id);
+            $member->delete();
         } catch (\Throwable $th) {
             return 'Error Program ' . $th;
         }
