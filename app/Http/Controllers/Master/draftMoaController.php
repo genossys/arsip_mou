@@ -11,6 +11,7 @@ use Charts;
 use App\Charts\SampleChart;
 use App\Master\draftMouModel;
 use App\Master\mitraModel;
+use Illuminate\Support\Facades\DB;
 
 class draftMoaController extends Controller
 {
@@ -247,15 +248,19 @@ class draftMoaController extends Controller
 
     public function chart()
     {
+        $mitra = DB::table('tb_draftmoa')->select(DB::raw('count(*) as jumlah, mitra'))
+            ->groupBy('mitra')
+            ->orderby('jumlah','desc')
+            ->limit(3)
+            ->get();
         $data = collect([]); // Could also be an array
         $datamou = collect([]); // Could also be an array
-        $mitra = mitraModel::all();
         $namaMitra = collect([]);
         foreach ($mitra as $m) {
             // Could also be an array_push if using an array rather than a collection.
-            $namaMitra->push($m->username);
-            $data->push(draftMoaModel::where('mitra', $m->username)->count());
-            $datamou->push(draftMouModel::where('mitra', $m->username)->count());
+            $namaMitra->push($m->mitra);
+            $data->push(draftMoaModel::where('mitra', $m->mitra)->count());
+            $datamou->push(draftMouModel::where('mitra', $m->mitra)->count());
         }
 
         $chart = new SampleChart;

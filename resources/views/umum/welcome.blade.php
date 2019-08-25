@@ -80,13 +80,13 @@
                     <div id="app" style="padding-top: 150px;width: 600px">
                         {!! $chart->container() !!}
                     </div>
-                    <script src="https://unpkg.com/vue"></script>
+                    <script src="{{ asset('/js/vue.js') }}" ></script>
                     <script>
                         var app = new Vue({
                             el: '#app',
                         });
                     </script>
-                    <script src=https://cdnjs.cloudflare.com/ajax/libs/echarts/4.0.2/echarts-en.min.js charset=utf-8></script>
+                    <script src="{{ asset('/js/echarts-en.min.js') }}" charset=utf-8></script>
                     {!! $chart->script() !!}
                 </div>
             </div>
@@ -98,5 +98,5 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/tampilan/genosstyle.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    <script src="{{ asset('/js/Chart.min.js') }}" charset="utf-8"></script>
 </body>
