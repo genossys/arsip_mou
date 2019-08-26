@@ -39,7 +39,7 @@ Data Arsip Kegiatan
                 <div class="modal-body" id="modalEdit">
                     <div class="form-group">
                         <label>Nomor Arsip</label>
-                        <input type="text" class="form-control" placeholder="Nomor Arsip" id="nomorArsip" name="nomorArsip">
+                        <input type="text" class="form-control" required placeholder="Nomor Arsip" id="nomorArsip" name="nomorArsip">
                     </div>
 
 
@@ -55,7 +55,7 @@ Data Arsip Kegiatan
                     <div class="form-group">
                         <label>File Lapoaran Kegiatan (maxs 2Mb) </label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="file">
+                            <input type="file" required class="custom-file-input" id="file" name="file">
                             <label class="custom-file-label" for="customFile">Pilih file</label>
                         </div>
                     </div>

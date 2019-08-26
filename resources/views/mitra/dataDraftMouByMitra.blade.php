@@ -46,11 +46,11 @@ Data Draft MOU
                     <input value="{{auth()->user()->username}}" hidden id="mitra" name="mitra">
                     <div class="form-group">
                         <label>Nomor MOU (Mitra) </label>
-                        <input type="text" class="form-control" placeholder="Nomor MOU Mitra" id="nomorMouMitra" name="nomorMouMitra">
+                        <input type="text" class="form-control" required placeholder="Nomor MOU Mitra" id="nomorMouMitra" name="nomorMouMitra">
                     </div>
                     <div class="form-group">
                         <label>Nomor Mou (UDB)</label>
-                        <input disabled type="text" class="form-control" placeholder="Nomor MOU UDB" id="nomorMouUdb" name="nomorMouUdb">
+                        <input disabled type="text" required class="form-control" placeholder="Nomor MOU UDB" id="nomorMouUdb" name="nomorMouUdb">
                     </div>
                     <div class="form-group">
                         <label>Tanggal Expired</label>
@@ -60,14 +60,14 @@ Data Draft MOU
                                     <i class="fa fa-calendar"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control float-right datepicker" name="tanggalExpired" id="tanggalExpired">
+                            <input type="text" required class="form-control float-right datepicker" name="tanggalExpired" id="tanggalExpired">
                             <input type="text" class="form-control float-right" hidden value="{{date('Y-m-d')}}" name="tanggalPembuatan" id="tanggalPembuatan">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>File MOA (*maxs 2Mb)</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" name="file">
+                            <input type="file"  required class="custom-file-input" id="file" name="file">
                             <label class="custom-file-label" for="customFile">Pilih file</label>
                         </div>
                     </div>

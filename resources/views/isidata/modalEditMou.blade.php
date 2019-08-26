@@ -60,7 +60,7 @@
 
 <div class="form-group">
     <label>Nomor Mou (UDB)</label>
-    <input type="text" class="form-control" placeholder="Nomor MOU UDB" id="nomorMouUdb" name="nomorMouUdb" value="{{$draftMou->nomorMouUdb}}">
+    <input type="text" class="form-control" required placeholder="Nomor MOU UDB" id="nomorMouUdb" name="nomorMouUdb" value="{{$draftMou->nomorMouUdb}}">
 </div>
 
 <div class="form-group">

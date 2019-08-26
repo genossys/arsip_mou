@@ -174,24 +174,39 @@ Data User
 
     $('#insertform').on('submit', function(event) {
         event.preventDefault();
-        $.ajax({
-            method: 'post',
-            url: '/admin/user/insertUser',
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                $('#modalTambahUser').modal('toggle');
-                Swal.fire({
-                    type: 'success',
-                    title: 'User berhasil di buat',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                showData();
-            }
-        });
+        var username = $("#username").val();
+        var email = $("#email").val();
+        var alamat = $("#alamat").val();
+        var noHp = $("#noHp").val();
+
+        if (username == '' || email == '' || alamat == '' || noHp == '') {
+            Swal.fire({
+                type: 'error',
+                title: 'Mohon isi data dengan benar',
+                showConfirmButton: true,
+                timer: 1500
+            })
+        } else {
+
+            $.ajax({
+                method: 'post',
+                url: '/admin/user/insertUser',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    $('#modalTambahUser').modal('toggle');
+                    Swal.fire({
+                        type: 'success',
+                        title: 'User berhasil di buat',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    showData();
+                }
+            });
+        }
     });
 
     $('#editform').on('submit', function(event) {
