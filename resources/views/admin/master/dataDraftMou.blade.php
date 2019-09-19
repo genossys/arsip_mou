@@ -14,12 +14,26 @@ Data DraftMou
         <!-- <button id="btnTambah" type="button" class="btn btn-primary btn box-tools pull-left" data-toggle="modal" data-target="#modalEditDraftMou">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </button> -->
-        <div class="pull-right">
-            <input id="caridata" type="text" class="form-control" name='caridata' onkeyup="showData()" />
-        </div>
-        <label class="pull-right mt-2"> Cari &nbsp;</label>
-    </div>
+        <div class="row">
+            <div class="col-md-3 offset-6">
+                <div class="form-group">
+                    <label>Status Expired</label>
+                    <select class="form-control" id="status" name='status' onchange="showData()">
+                        <option value="">Semua</option>
+                        <option value="aktif">Aktif</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Cari</label>
 
+                    <input id="caridata" type="text" class="form-control" name='caridata' onkeyup="showData()" />
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div id="tabelDisini"></div>
@@ -69,12 +83,14 @@ Data DraftMou
 <script>
     function showData() {
         var caridata = $("#caridata").val();
+        var status = $("#status").val();
 
         $.ajax({
             type: 'GET',
             url: '/admin/draftMou/showMou',
             data: {
                 caridata: caridata,
+                status: status,
             },
             success: function(response) {
 

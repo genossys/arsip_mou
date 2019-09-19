@@ -133,14 +133,44 @@ class draftMoaController extends Controller
 
     public function showMoa(Request $request)
     {
+        $skrng = date('Y-m-d');
+
         $caridata = $request->caridata;
-        $draftMoa = draftMoaModel::where('nomorMoaMitra', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('nomorMoaUdb', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('file', 'LIKE', '%' . $caridata . '%')
-            ->orderby('tanggalPembuatan', 'desc')
-            ->get();
+        $status = $request->status;
+
+        if($status == ''){
+            $draftMoa = draftMoaModel::where('nomorMoaMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMoaUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%')
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }
+        else if($status == 'aktif'){
+            $draftMoa = draftMoaModel::where('tanggalExpired', '>' , $skrng)
+            ->where(function ($q) use ($caridata) {
+            $q->where('nomorMoaMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMoaUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%');
+            })
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }else{
+            $draftMoa = draftMoaModel::where('tanggalExpired', '<' , $skrng)
+            ->where(function ($q) use ($caridata) {
+            $q->where('nomorMoaMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMoaUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%');
+            })
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }
+
         $contoh = $draftMoa->first();
 
         if ($contoh != null) {
@@ -250,7 +280,7 @@ class draftMoaController extends Controller
     {
         $mitra = DB::table('tb_draftmoa')->select(DB::raw('count(*) as jumlah, mitra'))
             ->groupBy('mitra')
-            ->orderby('jumlah','desc')
+            ->orderby('jumlah', 'desc')
             ->limit(3)
             ->get();
         $data = collect([]); // Could also be an array

@@ -10,6 +10,7 @@ use Validator, Redirect, Response, File;
 use App\Master\satuanModel;
 use App\Master\kategoriModel;
 use App\Master\mitraModel;
+use Carbon\Carbon;
 
 class draftMouController extends Controller
 {
@@ -36,7 +37,7 @@ class draftMouController extends Controller
                     ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
                     ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%');
             })
-            ->orderby('tanggalPembuatan','desc')
+            ->orderby('tanggalPembuatan', 'desc')
             ->get();
 
         $contoh = $draftMou->first();
@@ -87,7 +88,7 @@ class draftMouController extends Controller
 
         if ($validator->passes()) {
             $file = $request->file('file');
-            $new_name = $request->mitra . $request->tanggalPembuatan . rand(). '.' . $file->getClientOriginalExtension();
+            $new_name = $request->mitra . $request->tanggalPembuatan . rand() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('file'), $new_name);
         } else {
             $new_name = '';
@@ -116,7 +117,7 @@ class draftMouController extends Controller
                     ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
                     ->orwhere('file', 'LIKE', '%' . $caridata . '%');
             })
-            ->orderby('tanggalPembuatan','desc')
+            ->orderby('tanggalPembuatan', 'desc')
             ->get();
 
         $contoh = $draftMou->first();
@@ -132,14 +133,44 @@ class draftMouController extends Controller
 
     public function showMou(Request $request)
     {
+        $skrng = date('Y-m-d');
+
         $caridata = $request->caridata;
-        $draftMou = draftMouModel::where('nomorMouMitra', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('nomorMouUdb', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
-            ->orwhere('file', 'LIKE', '%' . $caridata . '%')
-            ->orderby('tanggalPembuatan','desc')
-            ->get();
+        $status = $request->status;
+
+        if($status == ''){
+            $draftMou = draftMouModel::where('nomorMouMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMouUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%')
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }
+        else if($status == 'aktif'){
+            $draftMou = draftMouModel::where('tanggalExpired', '>' , $skrng)
+            ->where(function ($q) use ($caridata) {
+            $q->where('nomorMouMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMouUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%');
+            })
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }else{
+            $draftMou = draftMouModel::where('tanggalExpired', '<' , $skrng)
+            ->where(function ($q) use ($caridata) {
+            $q->where('nomorMouMitra', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('nomorMouUdb', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalPembuatan', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('tanggalExpired', 'LIKE', '%' . $caridata . '%')
+                ->orwhere('file', 'LIKE', '%' . $caridata . '%');
+            })
+                ->orderby('tanggalPembuatan', 'desc')
+                ->get();
+        }
+
 
         $contoh = $draftMou->first();
 
